@@ -25,6 +25,7 @@ client.delete("/cart/:id", cartController().deleteCart)
 
 // user apies 
 client.get("/users", userController().index)
-client.put("/add-user", userController().addUser)
+client.post("/add-user", userController().addUser)
+client.put("/make-admin/:email", userController().makeAdmin)
 
 module.exports = client
