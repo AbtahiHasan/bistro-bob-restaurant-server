@@ -1,4 +1,3 @@
-const { ObjectId } = require("mongodb");
 const UserModel = require("./../models/userSchema")
 const userController = () => {
     return {
@@ -25,14 +24,13 @@ const userController = () => {
         async makeAdmin(req, res) {
             const email = req.params.email
             const admin = req.body.role
-            const result = UserModel.updateOne(
+            const result = await UserModel.updateOne(
                 {email: email},
                 {
                     $set: {
                         role: admin 
                     }                   
                 })
-            console.log(email)
             res.send(result)
 
         }
