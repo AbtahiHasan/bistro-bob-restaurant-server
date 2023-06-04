@@ -30,6 +30,11 @@ const menuController = () => {
             })
             const result = await menu.save()
             res.send(result)
+        },
+        async deleteMenu(req, res) {
+            const id = req.params.id
+            const result = await MenuModel.deleteOne({_id: new ObjectId(id)})
+            res.send(result)
         }
     }
 }
