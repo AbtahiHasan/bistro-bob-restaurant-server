@@ -1,14 +1,13 @@
 const UserModel = require("../../models/userSchema")
 
-const verityAdmin = (req, res, next) => {
+const verityAdmin = async (req, res, next) => {
     const email = req.decoded.email
-    const user = UserModel.findOne({email: email})
-    if(user.role === "admin") {
+    const user = await UserModel.findOne({email: email})
+    if(user?.role !== "admin") {
+        return res.status(401).send({error: true, message: "unauthorized access"})
+    }
         next()
-    }
-    else {
-       return res.status(401).send({error: true, message: "unauthorized access"})
-    }
+    
 }
 
 module.exports = verityAdmin

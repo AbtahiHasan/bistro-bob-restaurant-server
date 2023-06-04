@@ -1,6 +1,6 @@
 require("dotenv").config()
 var bodyParser = require('body-parser')
-const connectDb = require("./app/http/config/bgConfig")
+const connectDb = require("./app/http/config/dbConfig")
 // db connections 
 connectDb()
 const express = require('express');
@@ -12,9 +12,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
 app.use(bodyParser.json())
+
+
 const clientApi = require("./routes/clientApi")
-
-
 app.use(cors())
 app.use(express.json())
 app.use("/", clientApi)

@@ -5,16 +5,14 @@ const cartController = () => {
     return {
         async carts (req, res) {
            const email = req.query.email
-           console.log(req.decoded)
-        //    if(req.decoded.email !== email) {
-        //     return res.status(403).send({error: true, message: "forbidden access"})
-        //    }
+           if(req.decoded.email !== email) {
+            return res.status(403).send({error: true, message: "forbidden access"})
+           }
            const result = await cartModel.find({email: email})
            res.send(result)
         },
         async addCart (req, res) {
             const cartData = req.body
-            console.log(cartData)
             const cart = new cartModel({
                 menu_id: cartData._id,
                 image: cartData.image,

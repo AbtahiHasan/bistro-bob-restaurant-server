@@ -9,6 +9,7 @@ const adminCheckingController = () => {
                 const isAdmin = true
                 res.send({isAdmin})
             }
+            res.send({isAdmin : false})
         }
     }
 }
