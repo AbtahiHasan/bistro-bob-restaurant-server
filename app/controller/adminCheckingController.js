@@ -4,12 +4,13 @@ const adminCheckingController = () => {
     return {
         async index (req, res) {
             const email = req.query.email 
-            const user = await UserModel.findOne({email: email})
-            if(user?.role === "admin") {
-                const isAdmin = true
-                res.send({isAdmin})
-            }
-            res.send({isAdmin : false})
+            if (req.decoded.email !== email) {
+                return res.send({ admin: false })
+              }
+            const query = { email: email }
+            const user = await UserModel.findOne(query);
+            const result = { admin: user?.role === 'admin' }
+            res.send(result);
         }
     }
 }

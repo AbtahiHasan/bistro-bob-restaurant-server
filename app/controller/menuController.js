@@ -31,6 +31,22 @@ const menuController = () => {
             const result = await menu.save()
             res.send(result)
         },
+        async updateMenu(req, res) {
+            const id = req.params.id 
+            const menuData =  req.body
+            const result = await MenuModel.updateOne({
+                _id: new ObjectId(id)
+            }, {
+                $set: {
+                    name: menuData.name,
+                    image: menuData.image,
+                    category: menuData.category,
+                    price: menuData.price,
+                    recipe: menuData.recipe
+                }
+            })
+            res.send(result)
+        },
         async deleteMenu(req, res) {
             const id = req.params.id
             const result = await MenuModel.deleteOne({_id: new ObjectId(id)})

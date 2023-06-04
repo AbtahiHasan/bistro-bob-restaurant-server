@@ -21,10 +21,11 @@ client.get("/carts", verifyToken,  cartController().carts)
 
 // post methods 
 client.post("/add-cart", cartController().addCart)
-client.post("/add-menu", menuController().addMenu)
-client.delete("/delete-menu/:id", menuController().deleteMenu)
+client.post("/add-menu", verifyToken, verityAdmin, menuController().addMenu)
+client.put("/update-menu/:id", verifyToken, verityAdmin, menuController().updateMenu)
+client.delete("/delete-menu/:id", verifyToken, verityAdmin, menuController().deleteMenu)
 // delete methods 
-client.delete("/cart/:id",  cartController().deleteCart)
+client.delete("/cart/:id", verifyToken, cartController().deleteCart)
 
 
 
@@ -32,11 +33,12 @@ client.delete("/cart/:id",  cartController().deleteCart)
 // user apies 
 client.get("/users",verifyToken, verityAdmin, userController().index)
 client.post("/add-user", userController().addUser)
-client.put("/make-admin/:email",userController().makeAdmin)
+client.delete("/delete-user/:id", userController().deleteUser)
+client.put("/make-admin/:email", verifyToken, verityAdmin, userController().makeAdmin)
 
 
 // admin checking api 
-client.get("/is_admin", adminCheckingController().index)
+client.get("/is-admin", verifyToken, adminCheckingController().index)
 
 // jwt 
 client.post("/jwt", jwtController().index)
