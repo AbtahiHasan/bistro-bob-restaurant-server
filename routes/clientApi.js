@@ -21,6 +21,7 @@ client.get("/carts", verifyToken,  cartController().carts)
 
 // post methods 
 client.post("/add-cart", cartController().addCart)
+client.post("/add-menu", menuController().addMenu)
 
 // delete methods 
 client.delete("/cart/:id",  cartController().deleteCart)

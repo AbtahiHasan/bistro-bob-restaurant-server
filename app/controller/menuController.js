@@ -18,6 +18,18 @@ const menuController = () => {
             const id = req.params.id
             const result = await MenuModel.findOne({_id: new ObjectId(id)})
             res.send(result)
+        },
+        async addMenu(req, res) {
+            const menuData =  req.body
+            const menu = MenuModel({
+                name: menuData.name,
+                image: menuData.image,
+                category: menuData.category,
+                price: menuData.price,
+                recipe: menuData.recipe
+            })
+            const result = await menu.save()
+            res.send(result)
         }
     }
 }
